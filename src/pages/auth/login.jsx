@@ -17,6 +17,7 @@ const LoginPage = () => {
 
   const handleRegister = () => {
     // 处理注册逻辑
+    nav('user')
     console.log('Register clicked!');
   };
 
