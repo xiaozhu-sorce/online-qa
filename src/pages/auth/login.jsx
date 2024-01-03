@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import './login.less'
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const nav = useNavigate()
+
   const handleLogin = () => {
     // 处理登录逻辑
+    nav('admin')
+    // nav('user')
     console.log('Login clicked!');
   };
 
