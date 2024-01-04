@@ -7,6 +7,9 @@ import { Routes, Route } from 'react-router'
 import LoginPage from './pages/auth/login'
 import Home from './pages/home'
 import User from './pages/user'
+import Password from './pages/auth/password'
+import ProfileEdit from './pages/auth/profileEdit'
+
 // function App() {
 //   const [count, setCount] = useState(0)
 
@@ -44,10 +47,11 @@ const Router = () => {
       <Route path='/admin' element={<Home />}>
         <Route path='user' element={<User />} />
       </Route>
-      {/* <Route path='/user' element={<Borrow />}>
-        <Route path='mybook' element={<Mybook />} />
-        <Route path='books' element={<BookList />} />
-      </Route> */}
+      <Route path='/user' element={<ProfileEdit />}>
+      
+        {/* <Route path='mybook' element={<Mybook />} />
+        <Route path='books' element={<BookList />} /> */}
+      </Route>
     </Routes>
   )
 }
