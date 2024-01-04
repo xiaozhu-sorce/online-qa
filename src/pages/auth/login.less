@@ -2,41 +2,69 @@
   height: 100vh;
   width: 100vw;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   background: url('../bg.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 
-  .logo {
-    // width: 0.01px; /* 根据需要调整宽度 */
-    height: auto;
-    margin-bottom: 20px;
-  }
   h1 {
-    color: rgb(255, 249, 249);
+    color: rgb(20, 19, 19);
+    margin-top: 50px; /* Add margin for spacing from top */
+    margin-left: 20px; /* Adjust margin as needed for spacing from left */
+    font-weight: bold;
+  }
+
+  .logo {
+    height: auto;
+    margin: 30px auto; /* Auto margin on top and bottom to center horizontally */
   }
 
   .login-form {
     display: flex;
     flex-direction: column;
     align-items: center;
-
+  
     .login-name,
     .login-pwd {
       margin-bottom: 10px;
+  
+      span {
+        color: #151414; /* Text color for the hint */
+        margin-right: 10px; /* Adjust margin as needed */
+        font-weight: bold;
+        font-size: 17px; 
+      }
+  
       input {
-        padding: 8px;
         width: 200px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        border: none;
+        border-bottom: 1px solid #373636;  /* Add bottom border for the line effect */
+        padding: 8px;
+        background: transparent;
+        color: #201f1f; /* Text color for the input */
+        margin-top: 5px; /* Add margin-top for line break */
+        margin-left: 5px; /* Adjust margin as needed */
+      }
+    }
+    .role-selection {
+      display: flex;
+      align-items: center; /* Align role selection with password hint */
+      margin-top: 10px; /* Add margin-top for separation */
+      
+      label {
+        color: #3498db;
+        margin-right: 20px; /* Adjust margin as needed */
+        
+        input {
+          margin-right: 5px; /* Adjust margin as needed */
+        }
       }
     }
   }
 
   /* 新增的样式 */
   .button-container {
+    margin-top: 10px; /* Add margin-top for separation */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,6 +74,11 @@
     .register-button {
       button {
         // padding: 8px;
+        background: #3498db; /* Darker background color */
+        color: #fff; /* Text color */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
       }
     }
   }
