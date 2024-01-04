@@ -23,7 +23,10 @@ const LoginPage = () => {
 
   return (
     <div className='login-page'>
-      <h1>登陆页面</h1>
+       <div className='logo'>
+          <img src='../loginLogo.png' alt='loginLogo' />
+       </div>
+      <h1>基于智能机器人的在线答疑系统</h1>
       <div className='login-form'>
         <div className='login-name'>
           <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
