@@ -1,3 +1,4 @@
+// const BASE = "http://10.135.158.45:8080"
 const BASE = "/api"
 
 function Fetch(url, opt = {}) {
@@ -6,6 +7,7 @@ function Fetch(url, opt = {}) {
     opt.headers = {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        // 'Access-Control-Allow-Origin': '*',
     };
     if (opt.body) {
         opt.body = JSON.stringify(opt.body)
@@ -33,3 +35,14 @@ function Fetch(url, opt = {}) {
             throw e;
         })
 }
+
+const getUserList = () => {
+    return Fetch('/infos')
+}
+
+const Server = {}
+
+Server.getUserList = getUserList
+
+
+export default Server

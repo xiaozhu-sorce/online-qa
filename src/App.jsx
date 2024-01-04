@@ -6,6 +6,7 @@ import React from 'react'
 import { Routes, Route } from 'react-router'
 import LoginPage from './pages/auth/login'
 import Home from './pages/home'
+import User from './pages/user'
 // function App() {
 //   const [count, setCount] = useState(0)
 
@@ -41,9 +42,7 @@ const Router = () => {
     <Routes>
       <Route path='/' element={<LoginPage />} />
       <Route path='/admin' element={<Home />}>
-        {/* <Route path='user' element={<User />} />
-        <Route path='book' element={<Book />} />
-        <Route path='history' element={<History />} /> */}
+        <Route path='user' element={<User />} />
       </Route>
       {/* <Route path='/user' element={<Borrow />}>
         <Route path='mybook' element={<Mybook />} />

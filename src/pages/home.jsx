@@ -30,7 +30,7 @@ const Home = () => {
                 icon: <UserOutlined />,
                 label: '用户列表',
                 onClick: () => {
-                //   nav('user')
+                  nav('user')
                 }
               },
               {
