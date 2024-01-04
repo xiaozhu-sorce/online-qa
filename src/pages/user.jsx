@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Input, InputNumber, Popconfirm, Form, Typography, Space, Button,Switch } from 'antd';
+import { Table, Input, InputNumber, Popconfirm, Form, Typography, Space, Button, Switch } from 'antd';
 import Server from '../server/server';
 const { Search } = Input;
 
@@ -85,6 +85,19 @@ const User = () => {
 
     const cancel = () => {
         setEditingKey('');
+    };
+
+    const handleDelete = (key) => {
+        const newData = data.filter((item) => item.key !== key);
+        for (let u of data) {
+            if (u.key === key) {
+                Server.deleteUser(u.id).then((data) => {
+                    console.log(data)
+                })
+                continue;
+            }
+        }
+        setData(newData);
     };
 
     const onSearch = (nickname) => {

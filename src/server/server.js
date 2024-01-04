@@ -56,7 +56,7 @@ const mLogin = (tel, pwd) => {
     })
 }
 
-const Delete = (id) => {
+const deleteUser = (id) => {
     return Fetch('/user', {
       method: "DELETE",
       data: {
@@ -84,6 +84,6 @@ Server.mRegister = mRegister
 Server.mLogin = mLogin
 Server.getUserList = getUserList
 Server.searchUser = searchUser
-Server.Delete = Delete
+Server.deleteUser = deleteUser
 
 export default Server
