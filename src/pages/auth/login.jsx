@@ -1,23 +1,39 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import Server from '../../server/server';
 import './login.less'
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [tel, setTel] = useState('')
+  const [pwd, setPassword] = useState('')
+  const [role, setRole] = useState('')
 
   const nav = useNavigate()
 
   const handleLogin = () => {
-    // 处理登录逻辑
-    nav('admin/user')
-    console.log('Login clicked!');
+    if (role === 1) {
+      Server.mLogin(tel, pwd).then((res) => {
+        nav('admin/user')
+      })
+    } else {
+      Server.uLogin(tel, pwd).then((res) => {
+        nav('chat')
+      })
+    }
   };
 
   const handleRegister = () => {
     // 处理注册逻辑
-    nav('chat')
-    console.log('Register clicked!');
+    if (role === 1) {
+      Server.mRegister(tel, pwd).then((res) => {
+        
+      })
+    } else {
+      Server.uRegister(tel, pwd).then((res) => {
+        console.log(res)
+      })
+    }
+    window.location.reload() 
   };
 
   return (
@@ -28,20 +44,20 @@ const LoginPage = () => {
       </div>
       <div className='login-form'>
         <div className='login-name'>
-          <span>用户：<br /></span>
-          <input type="text" placeholder="请输入账号" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <span>电话：<br /></span>
+          <input type="text" placeholder="请输入电话" onChange={(e) => setTel(e.target.value)} />
         </div>
         <div className='login-pwd'>
           <span>密码：<br /></span>
-          <input type="password" placeholder="请输入密码" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input type="password" placeholder="请输入密码" onChange={(e) => setPassword(e.target.value)} />
         </div>
         <div className='role-selection'>
           <label>
-            <input type="radio" name="role" value="admin" />
+            <input type="radio" name="role" value="admin" onChange={(e) => setRole(1)} />
             管理员
           </label>
           <label>
-            <input type="radio" name="role" value="user" />
+            <input type="radio" name="role" value="user" onChange={(e) => setRole(0)} />
             用户
           </label>
         </div>

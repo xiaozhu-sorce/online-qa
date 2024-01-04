@@ -56,6 +56,28 @@ const mLogin = (tel, pwd) => {
     })
 }
 
+const uRegister = (tel, pwd) => {
+    return Fetch('/uRegister', {
+      method: "POST",
+      data: {
+        tel,
+        pwd
+      }
+    })
+}
+
+const uLogin = (tel, pwd) => {
+    return Fetch('/uLogin', {
+      method: "POST",
+      data: {
+        tel,
+        pwd
+      }
+    })
+}
+
+
+
 const deleteUser = (id) => {
     return Fetch('/user', {
       method: "DELETE",
@@ -82,6 +104,8 @@ const Server = {}
 
 Server.mRegister = mRegister
 Server.mLogin = mLogin
+Server.uRegister = uRegister
+Server.uLogin = uLogin
 Server.getUserList = getUserList
 Server.searchUser = searchUser
 Server.deleteUser = deleteUser
