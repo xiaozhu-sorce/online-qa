@@ -10,7 +10,6 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     // 处理登录逻辑
-    
     nav('admin/user')
     console.log('Login clicked!');
   };
@@ -23,23 +22,35 @@ const LoginPage = () => {
 
   return (
     <div className='login-page'>
+      <h1>基于智能机器人的在线答疑系统</h1>
       <div className='logo'>
         <img src='../loginLogo.png' alt='loginLogo' />
       </div>
-      <h1>基于智能机器人的在线答疑系统</h1>
       <div className='login-form'>
         <div className='login-name'>
-          <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <span>用户：<br /></span>
+          <input type="text" placeholder="请输入账号" value={username} onChange={(e) => setUsername(e.target.value)} />
         </div>
         <div className='login-pwd'>
-          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <span>密码：<br /></span>
+          <input type="password" placeholder="请输入密码" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </div>
+        <div className='role-selection'>
+          <label>
+            <input type="radio" name="role" value="admin" />
+            管理员
+          </label>
+          <label>
+            <input type="radio" name="role" value="user" />
+            用户
+          </label>
         </div>
       </div>
       <div className="button-container">
         <div className='login-button'>
           <button onClick={handleLogin}>登录</button>
         </div>
-        <div className='register-buton'>
+        <div className='register-button'>
           <button onClick={handleRegister}>注册</button>
         </div>
       </div>
