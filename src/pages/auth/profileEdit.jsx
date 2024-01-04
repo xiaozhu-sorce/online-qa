@@ -16,7 +16,7 @@ const ProfileEdit = () => {
 
   return (
     <div className="profile-edit-container">
-      <img src="./logo.png" alt="Logo" className="logo" />
+      <img src="../logo.png" alt="Logo" className="logo" />
       <div className="info-container">
         <div className="info-row">
           <label>昵称：</label>

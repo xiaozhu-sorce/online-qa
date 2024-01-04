@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Input, InputNumber, Popconfirm, Form, Typography, Space, Button } from 'antd';
+import { Table, Input, InputNumber, Popconfirm, Form, Typography, Space, Button,Switch } from 'antd';
 import Server from '../server/server';
 const { Search } = Input;
 
@@ -87,20 +87,21 @@ const User = () => {
         setEditingKey('');
     };
 
-    const onSearch = (id) => {
-        if (id) {
-          Server.searchUser(id).then((res) => {
-            setData([{ key: '0', ...res.userinfo }])
-          })
-        } else {
-          Server.getUserList().then((res) => {
-            let newD = res.userinfo.map((u, i) => {
-              return { key: `${i}`, ...u }
+    const onSearch = (nickname) => {
+        if (nickname) {
+            Server.searchUser(nickname).then((res) => {
+                console.log(res.userInfo)
+                setData([{ key: '0', ...res.userInfo }])
             })
-            setData(newD)
-          })
+        } else {
+            Server.getUserList().then((res) => {
+                let newD = res.userinfo.map((u, i) => {
+                    return { key: `${i}`, ...u }
+                })
+                setData(newD)
+            })
         }
-      }
+    }
 
     const columns = [
         {
@@ -108,6 +109,11 @@ const User = () => {
             dataIndex: 'id',
             width: '5%',
             editable: false,
+        },
+        {
+            title: '名称',
+            dataIndex: 'nickname',
+            width: '10%',
         },
         {
             title: '电话',
@@ -135,34 +141,34 @@ const User = () => {
         {
             title: '公司',
             dataIndex: 'company',
-            width: '20%',
+            width: '15%',
         },
         {
-            title: '身份',
-            dataIndex: 'role',
-            width: '5%',
-            editable: true,
+            title: '加入黑名单',
+            dataIndex: 'blacklist',
+            width: '10%',
+            render: (_, record) => <Switch checked={record.blacklist} onChange={() => handleSwitchChange(record)} />,
         },
         {
-          title: '操作',
-          dataIndex: 'operation',
-          width: '15%',
-          render: (_, record) => {
-            const editable = isEditing(record);
-            return editable ? (
-              <span>
-                <Popconfirm title="确认取消?" onConfirm={cancel}>
-                  <a>取消</a>
-                </Popconfirm>
-              </span>
-            ) : (
-              <Space>
-                <Popconfirm title="确认删除?" onConfirm={() => handleDelete(record.key)}>
-                  <a>删除</a>
-                </Popconfirm>
-              </Space>
-            );
-          },
+            title: '操作',
+            dataIndex: 'operation',
+            width: '10%',
+            render: (_, record) => {
+                const editable = isEditing(record);
+                return editable ? (
+                    <span>
+                        <Popconfirm title="确认取消?" onConfirm={cancel}>
+                            <a>取消</a>
+                        </Popconfirm>
+                    </span>
+                ) : (
+                    <Space>
+                        <Popconfirm title="确认删除?" onConfirm={() => handleDelete(record.key)}>
+                            <a>删除</a>
+                        </Popconfirm>
+                    </Space>
+                );
+            },
         },
     ];
 
@@ -194,9 +200,9 @@ const User = () => {
             >
                 添加用户
             </Button>
-            <Search placeholder="输入用户id"
-                  onSearch={onSearch} 
-                style={{ width: 200, marginLeft: 800 }} />
+            <Search placeholder="输入用户名称"
+                onSearch={onSearch}
+                style={{ width: 200, marginLeft: 200 }} />
             <Form form={form} com
                 ponent={false}>
                 <Table
@@ -205,7 +211,7 @@ const User = () => {
                         body: {
                             cell: EditableCell,
                         },
-                   }}
+                    }}
                     bordered
                     dataSource={data}
                     columns={mergedColumns}

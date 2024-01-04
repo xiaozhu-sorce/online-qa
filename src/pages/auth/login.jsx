@@ -10,22 +10,22 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     // 处理登录逻辑
-    nav('admin')
-    // nav('user')
+    
+    nav('admin/user')
     console.log('Login clicked!');
   };
 
   const handleRegister = () => {
     // 处理注册逻辑
-    nav('user')
+    nav('chat')
     console.log('Register clicked!');
   };
 
   return (
     <div className='login-page'>
-       <div className='logo'>
-          <img src='../loginLogo.png' alt='loginLogo' />
-       </div>
+      <div className='logo'>
+        <img src='../loginLogo.png' alt='loginLogo' />
+      </div>
       <h1>基于智能机器人的在线答疑系统</h1>
       <div className='login-form'>
         <div className='login-name'>

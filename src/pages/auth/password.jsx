@@ -14,7 +14,7 @@ const Password = () => {
 
   return (
     <div className="password-change-container">
-      <img src="./logo.png" alt="Logo" className="logo" />
+      <img src="../logo.png" alt="Logo" className="logo" />
       <div className="input-container">
         <label htmlFor="currentPassword">请输入原密码</label>
         <input

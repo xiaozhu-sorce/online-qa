@@ -36,13 +36,54 @@ function Fetch(url, opt = {}) {
         })
 }
 
+const mRegister = (tel, pwd) => {
+    return Fetch('/mRegister', {
+      method: "POST",
+      data: {
+        tel,
+        pwd
+      }
+    })
+}
+
+const mLogin = (tel, pwd) => {
+    return Fetch('/mLogin', {
+      method: "POST",
+      data: {
+        tel,
+        pwd
+      }
+    })
+}
+
+const Delete = (id) => {
+    return Fetch('/user', {
+      method: "DELETE",
+      data: {
+        id
+      }
+    })
+}
+
 const getUserList = () => {
     return Fetch('/infos')
 }
 
+const searchUser = (nickname) => {
+    return Fetch('/search',{
+        method: "POST",
+        data: {
+            nickname
+        }
+    })
+}
+
 const Server = {}
 
+Server.mRegister = mRegister
+Server.mLogin = mLogin
 Server.getUserList = getUserList
-
+Server.searchUser = searchUser
+Server.Delete = Delete
 
 export default Server
