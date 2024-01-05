@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import Server from '../../server/server';
 import Modal from 'react-modal';
-import './login.less'
+import './login.less';
 
 const LoginPage = () => {
-  const [tel, setTel] = useState('')
-  const [pwd, setPassword] = useState('')
-  const [role, setRole] = useState('')
+  const [tel, setTel] = useState('');
+  const [pwd, setPassword] = useState('');
+  const [role, setRole] = useState('');
   // 弹窗
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
 
-  const nav = useNavigate()
+  const nav = useNavigate();
 
   const openSuccessModal = () => {
     setIsSuccessModalOpen(true);
@@ -21,15 +22,35 @@ const LoginPage = () => {
     setIsSuccessModalOpen(false);
   };
 
+  const openErrorModal = () => {
+    setIsErrorModalOpen(true);
+    // Automatically close the error modal after 3 seconds (adjust as needed)
+    setTimeout(() => {
+      closeErrorModal();
+    }, 3000);
+  };
+
+  const closeErrorModal = () => {
+    setIsErrorModalOpen(false);
+  };
+
   const handleLogin = () => {
     if (role === 1) {
-      Server.mLogin(tel, pwd).then((res) => {
-        nav('admin/user')
-      })
+      Server.mLogin(tel, pwd)
+        .then(() => {
+          nav('admin/user');
+        })
+        .catch(() => {
+          openErrorModal();
+        });
     } else {
-      Server.uLogin(tel, pwd).then((res) => {
-        nav('chat')
-      })
+      Server.uLogin(tel, pwd)
+        .then(() => {
+          nav('chat');
+        })
+        .catch(() => {
+          openErrorModal();
+        });
     }
   };
 
@@ -38,32 +59,41 @@ const LoginPage = () => {
       Server.mRegister(tel, pwd)
         .then(() => {
           openSuccessModal();
-          // 在延迟或基于用户交互的情况下，你可以选择在这里重新加载页面。
-          // window.location.reload();
         })
-        .catch((error) => {
-          // 处理注册错误
-          console.error('注册失败：', error);
+        .catch(() => {
+          openErrorModal();
         });
     } else {
       Server.uRegister(tel, pwd)
         .then(() => {
           openSuccessModal();
-          // 在延迟或基于用户交互的情况下，你可以选择在这里重新加载页面。
-          // window.location.reload();
         })
-        .catch((error) => {
-          // 处理注册错误
-          console.error('注册失败：', error);
+        .catch(() => {
+          openErrorModal();
         });
     }
   };
+
   // 设置弹窗样式
-  const modalStyle = {
+  const successModalStyle = {
     content: {
       width: '300px',
       height: '200px',
       margin: 'auto',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  };
+
+  const errorModalStyle = {
+    content: {
+      width: '300px', // smaller width
+      height: '120px', // smaller height
+      left: '1200px', // position on the right
+      top: '10px', // add top positioning
+      position: 'fixed', // fixed position
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
@@ -110,13 +140,21 @@ const LoginPage = () => {
         isOpen={isSuccessModalOpen}
         onRequestClose={closeSuccessModal}
         contentLabel="Registration Success Modal"
-        style={{ ...modalStyle, overlay: { zIndex: 1000 } }} // 设置覆盖层样式和弹窗样式
+        style={{ ...successModalStyle, overlay: { zIndex: 1000 } }}
       >
         <h2>注册成功！</h2>
         <button onClick={closeSuccessModal}>关闭</button>
       </Modal>
+      {/* Error Modal */}
+      <Modal
+        isOpen={isErrorModalOpen}
+        onRequestClose={closeErrorModal}
+        contentLabel="Error Modal"
+        style={{ ...errorModalStyle, overlay: { zIndex: 1000 } }}
+      >
+        <h2>登录失败，请检查用户名和密码。</h2>
+      </Modal>
     </div>
-
   );
 };
 
