@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import Server from '../../server/server';
+import Modal from 'react-modal';
 import './login.less'
 
 const LoginPage = () => {
   const [tel, setTel] = useState('')
   const [pwd, setPassword] = useState('')
   const [role, setRole] = useState('')
+  // 弹窗
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 
   const nav = useNavigate()
+
+  const openSuccessModal = () => {
+    setIsSuccessModalOpen(true);
+  };
+
+  const closeSuccessModal = () => {
+    setIsSuccessModalOpen(false);
+  };
 
   const handleLogin = () => {
     if (role === 1) {
@@ -23,17 +34,41 @@ const LoginPage = () => {
   };
 
   const handleRegister = () => {
-    // 处理注册逻辑
-    if (role === 1) {
-      Server.mRegister(tel, pwd).then((res) => {
-        
-      })
+    if (role === 'admin') {
+      Server.mRegister(tel, pwd)
+        .then(() => {
+          openSuccessModal();
+          // 在延迟或基于用户交互的情况下，你可以选择在这里重新加载页面。
+          // window.location.reload();
+        })
+        .catch((error) => {
+          // 处理注册错误
+          console.error('注册失败：', error);
+        });
     } else {
-      Server.uRegister(tel, pwd).then((res) => {
-        console.log(res)
-      })
+      Server.uRegister(tel, pwd)
+        .then(() => {
+          openSuccessModal();
+          // 在延迟或基于用户交互的情况下，你可以选择在这里重新加载页面。
+          // window.location.reload();
+        })
+        .catch((error) => {
+          // 处理注册错误
+          console.error('注册失败：', error);
+        });
     }
-    window.location.reload() 
+  };
+  // 设置弹窗样式
+  const modalStyle = {
+    content: {
+      width: '300px',
+      height: '200px',
+      margin: 'auto',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   };
 
   return (
@@ -70,7 +105,16 @@ const LoginPage = () => {
           <button onClick={handleRegister}>注册</button>
         </div>
       </div>
-
+      {/* Success Modal */}
+      <Modal
+        isOpen={isSuccessModalOpen}
+        onRequestClose={closeSuccessModal}
+        contentLabel="Registration Success Modal"
+        style={{ ...modalStyle, overlay: { zIndex: 1000 } }} // 设置覆盖层样式和弹窗样式
+      >
+        <h2>注册成功！</h2>
+        <button onClick={closeSuccessModal}>关闭</button>
+      </Modal>
     </div>
 
   );
