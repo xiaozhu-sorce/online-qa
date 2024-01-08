@@ -100,6 +100,29 @@ const searchUser = (nickname) => {
     })
 }
 
+const getUserInfo = (id) => {
+  return Fetch('/userinfo',{
+    method: "POST",
+    data: {
+      id
+    }
+  })
+}
+
+const modifyInfo = (userInfo) => {
+  return Fetch('/info',{
+    method: "POST",
+    data: userInfo
+  })
+}
+
+const modifyPwd = (userInfo) => {
+  return Fetch('/pwd',{
+    method: "POST",
+    data: userInfo
+  })
+}
+
 const Server = {}
 
 Server.mRegister = mRegister
@@ -109,5 +132,8 @@ Server.uLogin = uLogin
 Server.getUserList = getUserList
 Server.searchUser = searchUser
 Server.deleteUser = deleteUser
+Server.modifyInfo = modifyInfo
+Server.getUserInfo = getUserInfo
+Server.modifyPwd = modifyPwd
 
 export default Server

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
+import Server from '../../server/server';
 import './password.less';
 
 const Password = () => {
@@ -9,7 +9,13 @@ const Password = () => {
 
   const handleChange = () => {
     // 处理密码修改逻辑
-    console.log('点击了密码修改按钮！');
+    const newData = {
+      id: parseFloat(localStorage.getItem("id")),
+      pwd: newPassword
+    };
+    Server.modifyPwd(newData).then((res) => {
+      console.log(newData)
+    })
   };
 
   return (

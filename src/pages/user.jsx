@@ -42,17 +42,6 @@ const User = () => {
     const [data, setData] = useState([]);
     const [editingKey, setEditingKey] = useState('');
 
-    // useEffect(() => {
-    //     Server.getUserList().then((res) => {
-    //         console.log(res);
-    //         let newD = res.data
-    //         .map((u, i) => {
-    //             return { key: `${i}`, ...u }
-    //         })
-    //         setData(newD)
-    //     })
-    // }, [])
-
     useEffect(() => {
         Server.getUserList()
             .then((res) => {
@@ -204,7 +193,7 @@ const User = () => {
 
     return (
         <>
-            <Button
+            {/* <Button
                 // onClick={handleAdd}
                 type="primary"
                 style={{
@@ -212,7 +201,7 @@ const User = () => {
                 }}
             >
                 添加用户
-            </Button>
+            </Button> */}
             <Search placeholder="输入用户名称"
                 onSearch={onSearch}
                 style={{ width: 200, marginLeft: 200 }} />

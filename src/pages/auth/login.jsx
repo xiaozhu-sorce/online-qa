@@ -17,6 +17,13 @@ const LoginPage = () => {
       })
     } else {
       Server.uLogin(tel, pwd).then((res) => {
+        localStorage.setItem('id', res.userInfo.id)
+        localStorage.setItem('nickname', res.userInfo.nickname)
+        localStorage.setItem('sex', res.userInfo.sex)
+        localStorage.setItem('location', res.userInfo.location)
+        localStorage.setItem('age', res.userInfo.age)
+        localStorage.setItem('company', res.userInfo.company)
+        localStorage.setItem('tel', res.userInfo.tel)
         nav('chat')
       })
     }
