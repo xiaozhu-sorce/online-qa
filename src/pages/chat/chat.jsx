@@ -6,8 +6,8 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router';
-import axios from 'axios';
-import OpenAI from 'openai';
+// import axios from 'axios';
+// import OpenAI from 'openai';
 
 const ChatApp = () => {
   const [inputValue, setInputValue] = useState('');

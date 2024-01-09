@@ -67,7 +67,7 @@ const LoginPage = () => {
           openSuccessModal();
         })
         .catch(() => {
-          openErrorModal();
+          
         });
     } else {
       Server.uRegister(tel, pwd)
@@ -75,7 +75,7 @@ const LoginPage = () => {
           openSuccessModal();
         })
         .catch(() => {
-          openErrorModal();
+          
         });
     }
   };

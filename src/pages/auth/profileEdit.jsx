@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Server from '../../server/server';
 import './ProfileEdit.less';
+import Modal from 'react-modal';
 
 const ProfileEdit = () => {
   const [nickname, setNickname] = useState(localStorage.getItem("nickname"));
@@ -10,7 +11,19 @@ const ProfileEdit = () => {
   const [company, setCompany] = useState(localStorage.getItem("company"));
   const [location, setLocation] = useState(localStorage.getItem("location"));
 
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
 
+  const openSaveModal = () => {
+    setIsSaveModalOpen(true);
+    // Automatically close the error modal after 3 seconds (adjust as needed)
+    setTimeout(() => {
+      closeSaveModal();
+    }, 3000);
+  };
+
+  const closeSaveModal = () => {
+    setIsSaveModalOpen(false);
+  };
   // Server.getUserInfo(parseFloat(localStorage.getItem("id"))).then((res) => {
   //   // setNickname(res.userInfo.nickname)
   //   // setTel(res.userInfo.tel)
@@ -41,10 +54,22 @@ const ProfileEdit = () => {
     localStorage.setItem('company', company)
     localStorage.setItem('tel', tel)
     Server.modifyInfo(newData).then((res) => {
-
+      openSaveModal();
     })
   };
-
+  const saveModalStyle = {
+    content: {
+      width: '150px', // smaller width
+      height: '90px', // smaller height
+      left: '1350px', // position on the right
+      top: '10px', // add top positioning
+      position: 'fixed', // fixed position
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  };
   return (
     <div className="profile-edit-container">
       <img src="../logo.png" alt="Logo" className="logo" />
@@ -72,6 +97,14 @@ const ProfileEdit = () => {
         </div>
       </div>
       <button onClick={handleSave}>保存</button>
+      <Modal
+        isOpen={isSaveModalOpen}
+        onRequestClose={closeSaveModal}
+        contentLabel="Save success Modal"
+        style={{ ...saveModalStyle, overlay: { zIndex: 1000 } }}
+      >
+        <h2>保存成功！</h2>
+      </Modal>
     </div>
   );
 };
