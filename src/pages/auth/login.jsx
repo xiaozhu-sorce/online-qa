@@ -44,19 +44,19 @@ const LoginPage = () => {
           openErrorModal();
         });
     } else {
-
-    Server.uLogin(tel, pwd).then((res) => {
-      localStorage.setItem('id', res.userInfo.id)
-      localStorage.setItem('nickname', res.userInfo.nickname)
-      localStorage.setItem('sex', res.userInfo.sex)
-      localStorage.setItem('location', res.userInfo.location)
-      localStorage.setItem('age', res.userInfo.age)
-      localStorage.setItem('company', res.userInfo.company)
-      localStorage.setItem('tel', res.userInfo.tel)
-      nav('chat')
-    }).catch(() => {
-      openErrorModal();
-    });
+      Server.uLogin(tel, pwd).then((res) => {
+        localStorage.setItem('id', res.userInfo.id)
+        localStorage.setItem('nickname', res.userInfo.nickname)
+        localStorage.setItem('sex', res.userInfo.sex)
+        localStorage.setItem('location', res.userInfo.location)
+        localStorage.setItem('age', res.userInfo.age)
+        localStorage.setItem('company', res.userInfo.company)
+        localStorage.setItem('tel', res.userInfo.tel)
+        // nav('user/profile')
+        window.open('http://localhost:8501/', '_blank')
+      }).catch(() => {
+        openErrorModal();
+      });
     }
   };
 
@@ -111,7 +111,7 @@ const LoginPage = () => {
     <div className='login-page'>
       <h1>基于智能机器人的在线答疑系统</h1>
       <div className='logo'>
-        <img src='../loginLogo.png' alt='loginLogo' />
+        <img src='../loginLogo.png' alt='loginLogo' width={150}/>
       </div>
       <div className='login-form'>
         <div className='login-name'>

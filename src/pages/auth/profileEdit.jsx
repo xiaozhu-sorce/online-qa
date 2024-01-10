@@ -24,17 +24,7 @@ const ProfileEdit = () => {
   const closeSaveModal = () => {
     setIsSaveModalOpen(false);
   };
-  // Server.getUserInfo(parseFloat(localStorage.getItem("id"))).then((res) => {
-  //   // setNickname(res.userInfo.nickname)
-  //   // setTel(res.userInfo.tel)
-  //   // setAge(res.userInfo.age)
-  //   // setLocation(res.userInfo.location)
-  //   // setCompany(res.userInfo.company)
-  //   // setData(res.userInfo)
-  //   // data = res.userInfo
-  //   console.log(data)
-  // })
-
+  
   const handleSave = () => {
     // 处理保存逻辑
     const newData = {

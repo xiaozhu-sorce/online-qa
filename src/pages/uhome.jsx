@@ -41,14 +41,15 @@ const UHome = () => {
                 nav('pwd')
               }
             },
-            //   {
-            //     key: '3',
-            //     icon: <UploadOutlined />,
-            //     label: '书籍历史表',
-            //     onClick: () => {
-            //     //   nav('history')
-            //     }
-            //   },
+              {
+                key: '3',
+                icon: <UploadOutlined />,
+                label: '对话聊天',
+                onClick: () => {
+                  // window.location.href = 'http://localhost:8501/';
+                  window.open('http://localhost:8501/', '_blank')
+                }
+              },
           ]}
         />
       </Sider>
