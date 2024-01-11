@@ -38,7 +38,7 @@ const AHome = () => {
               icon: <VideoCameraOutlined />,
               label: '用户使用数据',
               onClick: () => {
-                  // nav('data')
+                nav('data')
               }
             },
           ]}
@@ -64,7 +64,6 @@ const AHome = () => {
           className="site-layout-background"
           style={{
             margin: '24px 16px',
-            padding: 24,
             minHeight: 280,
           }}
         >
